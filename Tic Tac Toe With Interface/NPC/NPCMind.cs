@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AutoTris
+namespace NPC
 {
     public class NPCMind
     {
