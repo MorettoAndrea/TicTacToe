@@ -9,4 +9,4 @@ This is a simple interface that i made to play tic tac toe with a friend or agai
 - Hard;
 - Impossible: where the NPC can not loose, at most the game ends draw.
 
-Do what you want with my game, and if you'll find some issues, bugs or if you have some advices don't hesitate to comment, feedbacks are welcome.
+Do what you want with my game, and if you'll find some issues, bugs or if you have any suggestion don't hesitate to comment, feedbacks are welcome.
