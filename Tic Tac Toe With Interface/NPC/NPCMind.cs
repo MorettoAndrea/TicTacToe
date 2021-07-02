@@ -237,9 +237,7 @@ namespace NPC
         //go through the play tree, attributing to every leaf of the tree the state of the game
         private static void SetPlayTreeState(PlayTree playTree)
         {
-            char winner = '/';
-
-            if (GameIsOver(playTree.currGrid, out winner) || playTree.nextMove == null) //first checked gameIsOver to check if someone wins
+            if (GameIsOver(playTree.currGrid, out char winner) || playTree.nextMove == null) //first checked gameIsOver to check if someone wins
             {
                 switch (winner)
                 {

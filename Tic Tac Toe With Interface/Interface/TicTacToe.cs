@@ -52,216 +52,134 @@ namespace Interface
             StartNewGame.Hide();
         }
         #region FirstScreenManagement
-        private void ILetYouWin_Click(object sender, EventArgs e)
+        private void FirstScreen_Click(object sender, EventArgs e)
         {
-            difficulty = NPCMind.Difficulties.LetWin;
-            DecideFirstMove();
-        }
+            if (!(sender is Button b))
+            {
+                throw new ApplicationException("Unexpected event caller");
+            }
+            else if (b.Name == "Impossible")
+            {
+                difficulty = NPCMind.Difficulties.Impossible;
+                NPCMakeFirstMove = true;
+            }
+            else
+            {
+                difficulty = b.Name switch
+                {
+                    "ILetYouWin" => NPCMind.Difficulties.LetWin,
+                    "Coward" => NPCMind.Difficulties.Coward,
+                    "Easy" => NPCMind.Difficulties.Easy,
+                    "Medium" => NPCMind.Difficulties.Medium,
+                    "Hard" => NPCMind.Difficulties.Hard,
+                    _ => throw new ApplicationException("Unexpected event caller")
+                };
 
-        private void Coward_Click(object sender, EventArgs e)
-        {
-            difficulty = NPCMind.Difficulties.Coward;
-            DecideFirstMove();
-        }
-
-        private void Easy_Click(object sender, EventArgs e)
-        {
-            difficulty = NPCMind.Difficulties.Easy;
-            DecideFirstMove();
-        }
-
-        private void Medium_Click(object sender, EventArgs e)
-        {
-            difficulty = NPCMind.Difficulties.Medium;
-            DecideFirstMove();
-        }
-
-        private void Hard_Click(object sender, EventArgs e)
-        {
-            difficulty = NPCMind.Difficulties.Hard;
-            DecideFirstMove();
-        }
-
-        private void Impossible_Click(object sender, EventArgs e)
-        {
-            difficulty = NPCMind.Difficulties.Impossible;
+                DialogResult answer = MessageBox.Show("Do you want to make the first move?",
+                    "Who moves?", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+                NPCMakeFirstMove = answer == DialogResult.No;
+            }
             HideFirstScreen();
-            NPCTurn();
+            if (NPCMakeFirstMove)
+            {
+                NPCTurn();
+            }
         }
         #endregion
 
         #region EnterGrid
-        private void TL_MouseEnter(object sender, EventArgs e)
+        private void GridCell_MouseEnter(object sender, EventArgs e)
         {
-            EnterLabelOfGrid(TL, playerTurn);
-        }
-
-        private void TC_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(TC, playerTurn);
-        }
-
-        private void TR_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(TR, playerTurn);
-        }
-
-        private void CL_MouseEnter(object sender, EventArgs e)
-        {
-            if((sender as Label).Name=="CL")
+            if(!(sender is Label l))
             {
-                _ = 1;
+                throw new ApplicationException("Unexpected event caller");
             }
-            EnterLabelOfGrid(CL, playerTurn);
-        }
-
-        private void CC_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(CC, playerTurn);
-        }
-
-        private void CR_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(CR, playerTurn);
-        }
-
-        private void BL_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(BL, playerTurn);
-        }
-
-        private void BC_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(BC, playerTurn);
-        }
-
-        private void BR_MouseEnter(object sender, EventArgs e)
-        {
-            EnterLabelOfGrid(BR, playerTurn);
+            if (gameStatus == GameStatuses.InProgress)
+            {
+                (int, int) index = GetNumFromLabel(l);
+                if (currentGrid[index.Item1, index.Item2] == ' ')
+                {
+                    l.Font = new System.Drawing.Font("Arial Nova", 36F, System.Drawing.FontStyle.Regular,
+                        System.Drawing.GraphicsUnit.Point);
+                    l.ForeColor = Color.LightGray;
+                    l.Text = playerTurn;
+                }
+            }
         }
         #endregion
 
         #region LeaveGrid
-        private void TL_MouseLeave(object sender, EventArgs e)
+        private void GridCell_MouseLeave(object sender, EventArgs e)
         {
-            LeaveLabelOfGrid(TL);
-        }
-
-        private void TC_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(TC);
-        }
-
-        private void TR_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(TR);
-        }
-
-        private void CL_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(CL);
-        }
-
-        private void CC_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(CC);
-        }
-
-        private void CR_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(CR);
-        }
-
-        private void BL_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(BL);
-        }
-
-        private void BC_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(BC);
-        }
-
-        private void BR_MouseLeave(object sender, EventArgs e)
-        {
-            LeaveLabelOfGrid(BR);
+            if (!(sender is Label l))
+            {
+                throw new ApplicationException("Unexpected event caller");
+            }
+            if (gameStatus == GameStatuses.InProgress)
+            {
+                (int, int) index = GetNumFromLabel(l);
+                if (currentGrid[index.Item1, index.Item2] == ' ')
+                {
+                    l.Text = " ";
+                }
+            }
         }
         #endregion
 
         #region MouseClickes
-        private void TL_MouseClick(object sender, MouseEventArgs e)
+        private void GridCell_MouseClick(object sender, EventArgs e)
         {
-            ClickOnLabelOfTheGrid(TL,playerTurn);
-        }
+            if (!(sender is Label l))
+            {
+                throw new ApplicationException("Unexpected event caller");
+            }
+            if (gameStatus == GameStatuses.InProgress)
+            {
+                (int, int) index = GetNumFromLabel(l);
+                if (currentGrid[index.Item1, index.Item2] == ' ')
+                {
+                    l.Font = new Font("Arial Nova", 36F, FontStyle.Regular,
+                        GraphicsUnit.Point);
+                    l.ForeColor = Color.Black;
+                    l.Text = playerTurn;
+                    currentGrid[index.Item1, index.Item2] = playerTurn[0];
 
-        private void TC_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(TC, playerTurn);
-        }
+                    CheckGameStatus();
+                    if (!isOneVsOne)
+                    {
+                        NPCTurn();
+                    }
+                    else if (gameStatus == GameStatuses.InProgress)
+                    {
+                        playerTurn = playerTurn == "X" ? "O" : "X";
+                        ShowPlayerTurn();
+                    }
+                }
+            }
 
-        private void TR_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(TR, playerTurn);
-        }
-
-        private void CL_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(CL, playerTurn);
-        }
-
-        private void CC_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(CC, playerTurn);
-        }
-
-        private void CR_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(CR, playerTurn);
-        }
-
-        private void BL_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(BL, playerTurn);
-        }
-
-        private void BC_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(BC, playerTurn);
-        }
-
-        private void BR_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickOnLabelOfTheGrid(BR, playerTurn);
-        }
-        private void ChangeDifficulty_Click(object sender, EventArgs e)
-        {
-            TrisWindow_Load(null, null);
         }
 
         private void StartNewGame_Click(object sender, EventArgs e)
         {
-            LoadANewGame();
-        }
-        #endregion
-
-        #region MyMethods
-        private void LoadANewGame()
-        {
             currentGrid = new char[,] { { ' ', ' ', ' ' }, { ' ', ' ', ' ' }, { ' ', ' ', ' ' } };
             gameStatus = GameStatuses.InProgress;
 
-            TL.Text = TC.Text = TR.Text = CL.Text = CC.Text = CR.Text = BL.Text = BC.Text = BR.Text = " ";
+            foreach (Label l in Grid.Controls) //resetting grid appearance
+            {
+                l.Text = " ";
+            }
 
             if (isOneVsOne)
             {
                 playerTurn = "X";
-                GameOutcome.Font = new System.Drawing.Font("Showcard Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                GameOutcome.Font = new Font("Showcard Gothic", 15F, FontStyle.Regular,
+                    GraphicsUnit.Point);
                 GameOutcome.ForeColor = Color.Black;
-                //GameOutcome.Show();
                 ShowPlayerTurn();
             }
             else
-            {            
+            {
                 GameOutcome.Hide();
                 if (NPCMakeFirstMove)
                 {
@@ -269,21 +187,9 @@ namespace Interface
                 }
             }
         }
+        #endregion
 
-        private void DecideFirstMove()
-        {
-            DialogResult answer = MessageBox.Show("Do you want to make the first move?",
-                "Who moves?", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
-
-            HideFirstScreen();
-
-            if (NPCMakeFirstMove = (answer == DialogResult.No))
-            {
-                NPCTurn();
-            }
-        }
-
+        #region MyMethods
         private void NPCTurn()
         {
             if (gameStatus == GameStatuses.InProgress)
@@ -292,8 +198,8 @@ namespace Interface
                 Array.Copy(currentGrid, oldGrid, 9);
                 NPCMind.NPCNextMove(ref currentGrid, difficulty);
                 Label label = GetLabelFromNum(CheckEffectuatedMove(oldGrid, currentGrid));
-                label.Font = this.TL.Font = new System.Drawing.Font("Arial Nova", 36F, System.Drawing.FontStyle.Regular,
-                    System.Drawing.GraphicsUnit.Point);
+                label.Font = new Font("Arial Nova", 36F, FontStyle.Regular,
+                    GraphicsUnit.Point);
                 label.ForeColor = Color.Black;
                 label.Text = "X";
                 CheckGameStatus();
@@ -373,62 +279,6 @@ namespace Interface
             BR.Show();
             ChangeDifficulty.Show();
             StartNewGame.Show();
-        }
-
-        private void EnterLabelOfGrid(Label caller, string player)
-        {
-            if (gameStatus == GameStatuses.InProgress)
-            {
-                (int, int) index = GetNumFromLabel(caller);
-                if (currentGrid[index.Item1, index.Item2] == ' ')
-                {
-                    caller.Font = this.TL.Font = new System.Drawing.Font("Arial Nova", 36F, System.Drawing.FontStyle.Regular,
-                        System.Drawing.GraphicsUnit.Point);
-                    caller.ForeColor = Color.LightGray;
-                    caller.Text = player;
-                }
-            }
-        }
-
-        private void LeaveLabelOfGrid(Label caller)
-        {
-            if (gameStatus == GameStatuses.InProgress)
-            {
-                (int, int) index = GetNumFromLabel(caller);
-                if (currentGrid[index.Item1, index.Item2] == ' ')
-                {
-                    caller.Text = " ";
-                }
-            }
-        }
-
-        private void ClickOnLabelOfTheGrid(Label caller, string player)
-        {
-            if (gameStatus == GameStatuses.InProgress)
-            {
-                (int, int) index = GetNumFromLabel(caller);
-                if (currentGrid[index.Item1, index.Item2] == ' ')
-                {
-                    caller.Font = this.TL.Font = new System.Drawing.Font("Arial Nova", 36F, System.Drawing.FontStyle.Regular,
-                        System.Drawing.GraphicsUnit.Point);
-                    caller.ForeColor = Color.Black;
-                    caller.Text = player;
-                    currentGrid[index.Item1, index.Item2] = player[0];
-                    CheckGameStatus();
-                    if (!isOneVsOne)
-                    {
-                        NPCTurn();
-                    }
-                    else
-                    {
-                        if (gameStatus == GameStatuses.InProgress)
-                        {
-                            playerTurn = playerTurn == "X" ? "O" : "X";
-                            ShowPlayerTurn();
-                        }
-                    }
-                }
-            }
         }
 
         private (int,int) GetNumFromLabel(Label LName)
