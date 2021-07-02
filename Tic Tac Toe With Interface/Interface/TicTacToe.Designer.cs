@@ -64,7 +64,7 @@ namespace Interface
             this.ILetYouWin.TabIndex = 1;
             this.ILetYouWin.Text = "I let you win";
             this.ILetYouWin.UseVisualStyleBackColor = true;
-            this.ILetYouWin.Click += new System.EventHandler(this.ILetYouWin_Click);
+            this.ILetYouWin.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // Medium
             // 
@@ -75,7 +75,7 @@ namespace Interface
             this.Medium.TabIndex = 4;
             this.Medium.Text = "Medium";
             this.Medium.UseVisualStyleBackColor = true;
-            this.Medium.Click += new System.EventHandler(this.Medium_Click);
+            this.Medium.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // Easy
             // 
@@ -86,7 +86,7 @@ namespace Interface
             this.Easy.TabIndex = 3;
             this.Easy.Text = "Easy";
             this.Easy.UseVisualStyleBackColor = true;
-            this.Easy.Click += new System.EventHandler(this.Easy_Click);
+            this.Easy.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // Coward
             // 
@@ -97,7 +97,7 @@ namespace Interface
             this.Coward.TabIndex = 2;
             this.Coward.Text = "Coward";
             this.Coward.UseVisualStyleBackColor = true;
-            this.Coward.Click += new System.EventHandler(this.Coward_Click);
+            this.Coward.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // Hard
             // 
@@ -108,7 +108,7 @@ namespace Interface
             this.Hard.TabIndex = 5;
             this.Hard.Text = "Hard";
             this.Hard.UseVisualStyleBackColor = true;
-            this.Hard.Click += new System.EventHandler(this.Hard_Click);
+            this.Hard.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // TICTACTOE
             // 
@@ -143,7 +143,7 @@ namespace Interface
             this.Impossible.TabIndex = 6;
             this.Impossible.Text = "(litterally) Impossible";
             this.Impossible.UseVisualStyleBackColor = true;
-            this.Impossible.Click += new System.EventHandler(this.Impossible_Click);
+            this.Impossible.Click += new System.EventHandler(this.FirstScreen_Click);
             // 
             // TL
             // 
@@ -158,9 +158,9 @@ namespace Interface
             this.TL.TabIndex = 16;
             this.TL.Text = " ";
             this.TL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TL_MouseClick);
-            this.TL.MouseEnter += new System.EventHandler(this.TL_MouseEnter);
-            this.TL.MouseLeave += new System.EventHandler(this.TL_MouseLeave);
+            this.TL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.TL.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.TL.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // TC
             // 
@@ -175,9 +175,9 @@ namespace Interface
             this.TC.TabIndex = 16;
             this.TC.Text = " ";
             this.TC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TC_MouseClick);
-            this.TC.MouseEnter += new System.EventHandler(this.TC_MouseEnter);
-            this.TC.MouseLeave += new System.EventHandler(this.TC_MouseLeave);
+            this.TC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.TC.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.TC.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // TR
             // 
@@ -192,9 +192,9 @@ namespace Interface
             this.TR.TabIndex = 16;
             this.TR.Text = " ";
             this.TR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TR_MouseClick);
-            this.TR.MouseEnter += new System.EventHandler(this.TR_MouseEnter);
-            this.TR.MouseLeave += new System.EventHandler(this.TR_MouseLeave);
+            this.TR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.TR.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.TR.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // CL
             // 
@@ -209,9 +209,9 @@ namespace Interface
             this.CL.TabIndex = 16;
             this.CL.Text = " ";
             this.CL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CL_MouseClick);
-            this.CL.MouseEnter += new System.EventHandler(this.CL_MouseEnter);
-            this.CL.MouseLeave += new System.EventHandler(this.CL_MouseLeave);
+            this.CL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.CL.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.CL.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // CC
             // 
@@ -226,9 +226,9 @@ namespace Interface
             this.CC.TabIndex = 16;
             this.CC.Text = " ";
             this.CC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CC_MouseClick);
-            this.CC.MouseEnter += new System.EventHandler(this.CC_MouseEnter);
-            this.CC.MouseLeave += new System.EventHandler(this.CC_MouseLeave);
+            this.CC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.CC.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.CC.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // CR
             // 
@@ -243,9 +243,9 @@ namespace Interface
             this.CR.TabIndex = 16;
             this.CR.Text = " ";
             this.CR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CR_MouseClick);
-            this.CR.MouseEnter += new System.EventHandler(this.CR_MouseEnter);
-            this.CR.MouseLeave += new System.EventHandler(this.CR_MouseLeave);
+            this.CR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.CR.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.CR.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // BL
             // 
@@ -260,9 +260,9 @@ namespace Interface
             this.BL.TabIndex = 16;
             this.BL.Text = " ";
             this.BL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BL_MouseClick);
-            this.BL.MouseEnter += new System.EventHandler(this.BL_MouseEnter);
-            this.BL.MouseLeave += new System.EventHandler(this.BL_MouseLeave);
+            this.BL.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.BL.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.BL.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // BC
             // 
@@ -277,9 +277,9 @@ namespace Interface
             this.BC.TabIndex = 16;
             this.BC.Text = " ";
             this.BC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BC_MouseClick);
-            this.BC.MouseEnter += new System.EventHandler(this.BC_MouseEnter);
-            this.BC.MouseLeave += new System.EventHandler(this.BC_MouseLeave);
+            this.BC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.BC.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.BC.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // BR
             // 
@@ -294,9 +294,9 @@ namespace Interface
             this.BR.TabIndex = 16;
             this.BR.Text = " ";
             this.BR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BR_MouseClick);
-            this.BR.MouseEnter += new System.EventHandler(this.BR_MouseEnter);
-            this.BR.MouseLeave += new System.EventHandler(this.BR_MouseLeave);
+            this.BR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridCell_MouseClick);
+            this.BR.MouseEnter += new System.EventHandler(this.GridCell_MouseEnter);
+            this.BR.MouseLeave += new System.EventHandler(this.GridCell_MouseLeave);
             // 
             // Grid
             // 
@@ -322,7 +322,7 @@ namespace Interface
             this.ChangeDifficulty.TabIndex = 18;
             this.ChangeDifficulty.Text = "Change difficulty";
             this.ChangeDifficulty.UseVisualStyleBackColor = true;
-            this.ChangeDifficulty.Click += new System.EventHandler(this.ChangeDifficulty_Click);
+            this.ChangeDifficulty.Click += new System.EventHandler(this.TrisWindow_Load);
             // 
             // GameOutcome
             // 
